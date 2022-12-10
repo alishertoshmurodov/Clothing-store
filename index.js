@@ -29,8 +29,7 @@ products.forEach(element => {
     const addCart = document.createElement('div');
     addCart.setAttribute('class', 'add-cart');
 
-    const addCartLink = document.createElement('a');
-    addCartLink.setAttribute('href', '#');
+    const addCartLink = document.createElement('p');
     addCartLink.textContent = 'Add to Cart';
 
     const cartImg = document.createElement('embed');
@@ -72,6 +71,94 @@ products.forEach(element => {
 
     productsGridBox.appendChild(gridItem);
 });
+
+
+const cartContainerEl = document.querySelector('.cart-container');
+const addCartEls = document.querySelectorAll('.add-cart');
+
+const cartItemsEl = document.querySelector('.cart-items');
+
+
+
+
+cartItemsEl.style = 'display: flex; flex-direction: column; gap: 40px; width: fit-content; margin-left: 20%; margin-top: 50px;';
+
+
+const deleteItemButtons = [];
+
+
+
+addCartEls.forEach(element => {
+    element.addEventListener('click', function (e) {
+        cartContainerEl.style = 'display: block';
+        const imgUrl = element.nextElementSibling.getAttribute('src');
+
+        const priceItem = element.parentElement.nextElementSibling.querySelector('.price-tag');
+    
+        
+        const cartItem = document.createElement('div');
+        cartItem.setAttribute('class', 'cart-items__item');
+
+        const cartItemImg = document.createElement('div');
+        cartItemImg.setAttribute('class', 'cart-items__item__img');
+
+        const cartImg = document.createElement('img');
+        cartImg.src = imgUrl;
+
+        const cartItemText = document.createElement('div');
+        cartItemText.setAttribute('class', 'cart-items__item__text');
+
+        const cartItemName = document.createElement('h4');
+        cartItemName.textContent = products[0].name;
+
+        const cartItemPrice = document.createElement('p');
+        cartItemPrice.textContent = 'Price: ' + priceItem.textContent;
+
+        const cartItemColor = document.createElement('p');
+        cartItemColor.textContent = 'Color: ' + products[0].color;
+
+        const cartItemSize = document.createElement('p');
+        cartItemSize.textContent = 'Size: ' + products[0].size;
+
+        const cartItemQuantity = document.createElement('p');
+        cartItemQuantity.textContent = 'Quantity: ' + '1';
+
+        const deleteItemIconBlock = document.createElement('div');
+        deleteItemIconBlock.setAttribute('class', 'delete-item-block');
+
+        const deleteItem = document.createElement('i');
+        deleteItem.setAttribute('class', 'fa-solid fa-x delete-button');
+        
+        deleteItemButtons.push(deleteItemIconBlock);
+        
+
+        cartItemImg.appendChild(cartImg);
+        cartItemText.appendChild(cartItemName);
+        cartItemText.appendChild(cartItemPrice);
+        cartItemText.appendChild(cartItemColor);
+        cartItemText.appendChild(cartItemSize);
+        cartItemText.appendChild(cartItemQuantity);
+        cartItem.appendChild(cartItemImg);
+        cartItem.appendChild(cartItemText);
+        deleteItemIconBlock.appendChild(deleteItem);
+        cartItem.appendChild(deleteItemIconBlock);
+        cartItemsEl.appendChild(cartItem);
+
+    });
+
+    
+});
+
+
+for (let i = 0; i < deleteItemButtons.length; i++) {
+    deleteItemButtons[i].addEventListener('click', function (e) {
+        console.log(deleteItemButtons[i]);
+    });
+}
+
+
+
+
 
 
 
